@@ -81,6 +81,9 @@ public class GameView extends View implements PlayerDeathListener{
         xScroll -= scrollSpeed;
         for(GameEntity entity: gameEntities){
             entity.update(deltaTime);
+            if(entity instanceof Obstacle){
+                player.checkObstacle((Obstacle)entity);
+            }
         }
 
         removeDeadEntities();

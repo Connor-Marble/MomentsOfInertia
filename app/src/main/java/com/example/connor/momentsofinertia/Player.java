@@ -21,6 +21,8 @@ public class Player extends GameEntity {
 
     private ArrayList<PlayerDeathListener> deathListeners;
 
+    private Rect collisionRect;
+
     public Player(Vector2D position){
         super(position);
         velocity = new Vector2D(0, 0);
@@ -58,6 +60,9 @@ public class Player extends GameEntity {
 
         parentView.addEntity(new PlayerTrail(new Vector2D(position.x, position.y)));
 
+        collisionRect = new Rect((int)position.x-5, (int)position.y-5,
+                (int)position.x+5, (int)position.y + 5);
+
         if (position.y > 1000)
             death();
     }
@@ -90,5 +95,10 @@ public class Player extends GameEntity {
 
     public void createRope(Vector2D touchPosition){
         rope = new Rope(touchPosition, position);
+    }
+
+    public void checkObstacle(Obstacle obstacle){
+        if(obstacle.checkRect(collisionRect))
+            death();
     }
 }

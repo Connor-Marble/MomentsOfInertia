@@ -7,7 +7,9 @@ import android.graphics.Rect;
  * Created by connor on 2/2/15.
  */
 public interface Collidable {
-    public void checkRect(Rect area);
+    public Rect collisionRect = null;
 
-    public void ReicieveRaycast(Vector2D origin, double angle, double distance);
+    public boolean checkRect(Rect area);
+
+    public boolean RecieveRaycast(Vector2D origin, double angle, double distance);
 }

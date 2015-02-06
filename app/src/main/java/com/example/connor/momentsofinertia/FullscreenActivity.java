@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 
+import java.util.Random;
+
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -73,7 +75,11 @@ public class FullscreenActivity extends Activity{
         player.registerDeathListener(gameView);
 
         for(int i =0; i<4000; i+=100){
+
             gameView.addEntity(new BackgroundStar(new Vector2D(i,0)));
+
+            Random random = new Random();
+            gameView.addEntity(new Obstacle(new Vector2D(i, random.nextDouble() * 1000)));
         }
     }
 
