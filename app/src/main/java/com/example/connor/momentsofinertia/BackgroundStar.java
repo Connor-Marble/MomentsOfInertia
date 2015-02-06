@@ -48,9 +48,11 @@ public class BackgroundStar extends GameEntity {
 
     public void deathCheck(int xScroll){
         int scroll = (int)((double)xScroll * (distance/2 + 0.5));
-        if(scroll + (int)position.x < 0){
+        if(scroll + (int)position.x + size < 0){
             rollParams();
-            position.x += 4000;
+
+            scroll = (int)((double)xScroll * (distance/2 + 0.5));
+            position.x = 2000-scroll;
         }
     }
 }
