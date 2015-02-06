@@ -19,7 +19,7 @@ import java.util.LinkedList;
 /**
  * Created by connor on 1/30/15.
  */
-public class GameView extends View{
+public class GameView extends View implements PlayerDeathListener{
 
     private Vector2D cameraPosition;
     private LinkedList<GameEntity> gameEntities;
@@ -81,6 +81,9 @@ public class GameView extends View{
         xScroll -= scrollSpeed;
         for(GameEntity entity: gameEntities){
             entity.update(deltaTime);
+            if(entity instanceof Obstacle){
+                player.checkObstacle((Obstacle)entity);
+            }
         }
 
         removeDeadEntities();
@@ -146,4 +149,15 @@ public class GameView extends View{
         return false;
     }
 
+    @Override
+    public void onPlayerDeath() {
+        xScroll = 0;
+
+        for(GameEntity entity: gameEntities){
+            if (entity instanceof BackgroundStar){
+                ((BackgroundStar)entity).rollParams();
+                entity.position.x %=2000;
+            }
+        }
+    }
 }

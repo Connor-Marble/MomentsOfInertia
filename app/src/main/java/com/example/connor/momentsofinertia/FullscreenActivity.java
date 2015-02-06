@@ -2,15 +2,14 @@ package com.example.connor.momentsofinertia;
 
 import com.example.connor.momentsofinertia.util.SystemUiHider;
 
-import android.annotation.TargetApi;
+
 import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-import android.view.MotionEvent;
+
 import android.view.View;
 import android.view.Window;
+
+import java.util.Random;
 
 
 /**
@@ -73,9 +72,14 @@ public class FullscreenActivity extends Activity{
         Player player = new Player(new Vector2D(500d,100d));
         gameView.addEntity(player);
         gameView.player = player;
+        player.registerDeathListener(gameView);
 
         for(int i =0; i<4000; i+=100){
+
             gameView.addEntity(new BackgroundStar(new Vector2D(i,0)));
+
+            Random random = new Random();
+            gameView.addEntity(new Obstacle(new Vector2D(i, random.nextDouble() * 1000)));
         }
     }
 

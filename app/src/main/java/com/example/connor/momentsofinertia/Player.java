@@ -5,6 +5,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * Created by connor on 1/31/15.
  */
@@ -16,10 +19,16 @@ public class Player extends GameEntity {
 
     final double GRAVITY = 100d;
 
+    private ArrayList<PlayerDeathListener> deathListeners;
+
+    private Rect collisionRect;
+
     public Player(Vector2D position){
         super(position);
         velocity = new Vector2D(0, 0);
+        deathListeners = new ArrayList<PlayerDeathListener>();
     }
+
     @Override
     public void draw(int xScroll, Canvas canvas, Paint paint){
         paint.setColor(Color.BLUE);
@@ -51,6 +60,9 @@ public class Player extends GameEntity {
 
         parentView.addEntity(new PlayerTrail(new Vector2D(position.x, position.y)));
 
+        collisionRect = new Rect((int)position.x-5, (int)position.y-5,
+                (int)position.x+5, (int)position.y + 5);
+
         if (position.y > 1000)
             death();
     }
@@ -64,12 +76,29 @@ public class Player extends GameEntity {
         velocity = new Vector2D(velocity.x + (ropeVector.x * ropePull), velocity.y + (ropeVector.y*ropePull));
     }
 
+    public void registerDeathListener(PlayerDeathListener listener){
+        deathListeners.add(listener);
+    }
+
+    private void notifyDeathListeners(){
+        for(PlayerDeathListener listener : deathListeners){
+            listener.onPlayerDeath();
+        }
+    }
+
     public void death(){
+        notifyDeathListeners();
         velocity = new Vector2D(0, 0);
         position.y = 0d;
+        position.x = 400;
     }
 
     public void createRope(Vector2D touchPosition){
         rope = new Rope(touchPosition, position);
+    }
+
+    public void checkObstacle(Obstacle obstacle){
+        if(obstacle.checkRect(collisionRect))
+            death();
     }
 }
