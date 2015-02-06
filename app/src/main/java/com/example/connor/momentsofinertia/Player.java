@@ -5,6 +5,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * Created by connor on 1/31/15.
  */
@@ -16,10 +19,14 @@ public class Player extends GameEntity {
 
     final double GRAVITY = 100d;
 
+    private ArrayList<PlayerDeathListener> deathListeners;
+
     public Player(Vector2D position){
         super(position);
         velocity = new Vector2D(0, 0);
+        deathListeners = new ArrayList<PlayerDeathListener>();
     }
+
     @Override
     public void draw(int xScroll, Canvas canvas, Paint paint){
         paint.setColor(Color.BLUE);
@@ -64,9 +71,21 @@ public class Player extends GameEntity {
         velocity = new Vector2D(velocity.x + (ropeVector.x * ropePull), velocity.y + (ropeVector.y*ropePull));
     }
 
+    public void registerDeathListener(PlayerDeathListener listener){
+        deathListeners.add(listener);
+    }
+
+    private void notifyDeathListeners(){
+        for(PlayerDeathListener listener : deathListeners){
+            listener.onPlayerDeath();
+        }
+    }
+
     public void death(){
+        notifyDeathListeners();
         velocity = new Vector2D(0, 0);
         position.y = 0d;
+        position.x = 400;
     }
 
     public void createRope(Vector2D touchPosition){
