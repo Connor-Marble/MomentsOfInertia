@@ -24,9 +24,10 @@ public class Player extends GameEntity {
     private Rect collisionRect;
 
     public Player(Vector2D position){
-        super(position);
+        super(position, 0);
         velocity = new Vector2D(0, 0);
         deathListeners = new ArrayList<PlayerDeathListener>();
+
     }
 
     @Override
@@ -40,7 +41,8 @@ public class Player extends GameEntity {
     }
 
     public void drawRope(int xScroll, Canvas canvas, Paint paint){
-        paint.setColor(Color.WHITE);
+        paint.setColor(Color.GRAY);
+        paint.setAlpha(150);
         canvas.drawLine((float)rope.endPoint.x + xScroll,
                 (float)rope.endPoint.y,
                 (float)rope.ropePoints.get(0).x + xScroll,

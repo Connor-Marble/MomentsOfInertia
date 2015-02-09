@@ -12,7 +12,7 @@ public class Obstacle extends GameEntity implements Collidable {
     public Rect collisionRect;
 
     public Obstacle(Vector2D position) {
-        super(position);
+        super(position, 1);
         collisionRect = new Rect((int)position.x, (int)position.y,
                 (int)position.x + 75, (int)position.y+75);
 
@@ -26,6 +26,9 @@ public class Obstacle extends GameEntity implements Collidable {
 
     @Override
     public boolean checkRect(Rect area) {
+        if(area == null)
+            return false;
+
         if(area.right < collisionRect.left)
             return false;
 
