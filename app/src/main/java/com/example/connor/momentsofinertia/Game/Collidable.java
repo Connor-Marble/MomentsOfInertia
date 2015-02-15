@@ -1,7 +1,8 @@
-package com.example.connor.momentsofinertia;
+package com.example.connor.momentsofinertia.Game;
 
-import android.graphics.Path;
 import android.graphics.Rect;
+
+import com.example.connor.momentsofinertia.util.Vector2D;
 
 /**
  * Created by connor on 2/2/15.

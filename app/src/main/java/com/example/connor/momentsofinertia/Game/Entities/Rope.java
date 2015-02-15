@@ -1,4 +1,6 @@
-package com.example.connor.momentsofinertia;
+package com.example.connor.momentsofinertia.Game.Entities;
+
+import com.example.connor.momentsofinertia.util.Vector2D;
 
 import java.util.ArrayList;
 

@@ -1,17 +1,19 @@
-package com.example.connor.momentsofinertia;
+package com.example.connor.momentsofinertia.Game;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.text.style.UpdateAppearance;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewTreeObserver;
 
-import java.util.ArrayList;
+import com.example.connor.momentsofinertia.Game.Entities.BackgroundStar;
+import com.example.connor.momentsofinertia.Game.Entities.GameEntity;
+import com.example.connor.momentsofinertia.Game.Entities.Player;
+import com.example.connor.momentsofinertia.util.Vector2D;
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -19,7 +21,7 @@ import java.util.LinkedList;
 /**
  * Created by connor on 1/30/15.
  */
-public class GameView extends View implements PlayerDeathListener{
+public class GameView extends View implements PlayerDeathListener {
 
     private Vector2D cameraPosition;
     private LinkedList<GameEntity> gameEntities;
