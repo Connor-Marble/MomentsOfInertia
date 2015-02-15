@@ -1,8 +1,11 @@
-package com.example.connor.momentsofinertia;
+package com.example.connor.momentsofinertia.Game.Entities;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+
+import com.example.connor.momentsofinertia.Game.GameView;
+import com.example.connor.momentsofinertia.util.Vector2D;
 
 /**
  * Created by connor on 1/30/15.

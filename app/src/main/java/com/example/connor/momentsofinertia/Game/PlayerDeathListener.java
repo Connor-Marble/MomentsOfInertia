@@ -1,4 +1,4 @@
-package com.example.connor.momentsofinertia;
+package com.example.connor.momentsofinertia.Game;
 
 /**
  * Created by connor on 2/6/15.

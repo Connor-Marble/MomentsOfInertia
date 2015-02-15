@@ -1,6 +1,4 @@
-package com.example.connor.momentsofinertia;
-
-import java.util.Vector;
+package com.example.connor.momentsofinertia.util;
 
 /**
  * Created by connor on 1/30/15.

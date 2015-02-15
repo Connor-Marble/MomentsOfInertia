@@ -1,11 +1,14 @@
-package com.example.connor.momentsofinertia;
+package com.example.connor.momentsofinertia.Game.Entities;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
-import java.lang.reflect.Array;
+import com.example.connor.momentsofinertia.Game.Obstacle;
+import com.example.connor.momentsofinertia.Game.PlayerDeathListener;
+import com.example.connor.momentsofinertia.util.Vector2D;
+
 import java.util.ArrayList;
 
 /**
