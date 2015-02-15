@@ -1,11 +1,14 @@
 package com.example.connor.momentsofinertia.Game;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -26,13 +29,18 @@ public class GameView extends View implements PlayerDeathListener {
     private Vector2D cameraPosition;
     private LinkedList<GameEntity> gameEntities;
     private LinkedList<GameEntity> newEntities;
-    int xScroll = 0;
-    private int scrollSpeed = 2;
+    double xScroll = 0;
+
+    private int scrollSpeed = 150;
     public Player player;
+
 
     private long lastUpdate = System.currentTimeMillis();
     final int BACKGROUND_COLOR = Color.BLACK;
-    final boolean DRAW_FRAMERATE = false;
+    final boolean DRAW_FRAMERATE = true;
+    private Bitmap drawBitmap;
+
+    double deltaTime;
 
     public GameView(Context context) {
         super(context);
@@ -54,43 +62,70 @@ public class GameView extends View implements PlayerDeathListener {
     {
         gameEntities = new LinkedList<GameEntity>();
         newEntities = new LinkedList<GameEntity>();
+
+        drawBitmap = Bitmap.createBitmap(1920, 1080, Bitmap.Config.ARGB_8888);
     }
 
     public void onDraw(Canvas canvas){
-        double deltaTime = getDeltaTime();
+
 
         update(deltaTime);
 
-
+        Canvas btmpCanvas = new Canvas(drawBitmap);
 
         Paint paint = new Paint();
         paint.setColor(BACKGROUND_COLOR);
-        canvas.drawRect(new Rect(this.getLeft(), this.getTop(),
+        btmpCanvas.drawRect(new Rect(this.getLeft(), this.getTop(),
                 this.getRight(), this.getBottom()), paint);
 
         if(DRAW_FRAMERATE)
-            drawFrameRate(canvas, deltaTime);
+            drawFrameRate(btmpCanvas, deltaTime);
 
         for(GameEntity entity: gameEntities){
-            entity.draw(xScroll, canvas, paint);
+            entity.draw((int)xScroll, btmpCanvas, paint);
         }
+
+        paint.setAlpha(255);
+        paint.setColor(Color.WHITE);
+
+        if(checkCollision())
+            player.death();
+
+        canvas.drawBitmap(drawBitmap, 0, 0, paint);
+
+        deltaTime = getDeltaTime();
 
         lastUpdate = System.currentTimeMillis();
         this.invalidate();
+
+
+    }
+
+    public boolean checkCollision(){
+
+        //Log.d("color", Integer.toHexString(drawBitmap.getPixel((int) (player.position.x+5 + xScroll), (int) player.position.y+5)));
+
+        if(player.position.x + xScroll > drawBitmap.getWidth() || player.position.x + xScroll < 0)
+            return true;
+
+        if(player.position.y > drawBitmap.getHeight() || player.position.y < 0)
+            return true;
+
+        int colorDif = Math.abs(drawBitmap.getPixel((int) (player.position.x + xScroll), (int) player.position.y) - Color.RED);
+
+        return (colorDif < 5);
     }
 
     public void update(double deltaTime){
-        xScroll -= scrollSpeed;
+        xScroll -= scrollSpeed * deltaTime;
         for(GameEntity entity: gameEntities){
             entity.update(deltaTime);
-            if(entity instanceof Obstacle){
-                player.checkObstacle((Obstacle)entity);
-            }
         }
 
         removeDeadEntities();
 
-        createNewEntities();
+        if(newEntities.size() > 0)
+            createNewEntities();
     }
 
     public void drawFrameRate(Canvas canvas, double deltaTime){
