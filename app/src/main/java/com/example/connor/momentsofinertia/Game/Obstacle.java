@@ -15,7 +15,7 @@ public class Obstacle extends GameEntity implements Collidable {
     public Rect collisionRect;
 
     public Obstacle(Vector2D position) {
-        super(position, 1);
+        super(position, 0);
         collisionRect = new Rect((int)position.x, (int)position.y,
                 (int)position.x + 75, (int)position.y+75);
 
