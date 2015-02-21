@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
-import com.example.connor.momentsofinertia.Game.Obstacle;
 import com.example.connor.momentsofinertia.Game.PlayerDeathListener;
 import com.example.connor.momentsofinertia.util.Vector2D;
 
