@@ -2,7 +2,7 @@ package com.example.connor.momentsofinertia.Activities;
 
 import com.example.connor.momentsofinertia.Game.Entities.BackgroundStar;
 import com.example.connor.momentsofinertia.Game.GameView;
-import com.example.connor.momentsofinertia.Game.Obstacle;
+import com.example.connor.momentsofinertia.Game.Entities.Obstacle;
 import com.example.connor.momentsofinertia.Game.Entities.Player;
 import com.example.connor.momentsofinertia.R;
 import com.example.connor.momentsofinertia.util.Vector2D;
