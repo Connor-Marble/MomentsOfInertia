@@ -111,9 +111,9 @@ public class GameView extends View implements PlayerDeathListener {
         if(player.position.y > drawBitmap.getHeight() || player.position.y < 0)
             return true;
 
-        int colorDif = Math.abs(drawBitmap.getPixel((int) (player.position.x + xScroll), (int) player.position.y) - Color.RED);
+        int colorAtPlayer = drawBitmap.getPixel((int) (player.position.x + xScroll), (int) player.position.y);
 
-        return (colorDif < 5);
+        return (Color.red(colorAtPlayer) > 150);
     }
 
     public void update(double deltaTime){
