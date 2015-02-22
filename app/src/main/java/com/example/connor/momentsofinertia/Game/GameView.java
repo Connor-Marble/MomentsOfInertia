@@ -34,6 +34,8 @@ public class GameView extends View implements PlayerDeathListener {
     private int scrollSpeed = 150;
     public Player player;
 
+    private final int COLLISION_THRESHOLD = 150;
+
 
     private long lastUpdate = System.currentTimeMillis();
     final int BACKGROUND_COLOR = Color.BLACK;
@@ -113,7 +115,7 @@ public class GameView extends View implements PlayerDeathListener {
 
         int colorAtPlayer = drawBitmap.getPixel((int) (player.position.x + xScroll), (int) player.position.y);
 
-        return (Color.red(colorAtPlayer) > 150);
+        return (Color.red(colorAtPlayer) > COLLISION_THRESHOLD);
     }
 
     public void update(double deltaTime){
