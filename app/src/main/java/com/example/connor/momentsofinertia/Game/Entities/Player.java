@@ -23,7 +23,7 @@ public class Player extends GameEntity {
 
     private ArrayList<PlayerDeathListener> deathListeners;
 
-    private Rect collisionRect;
+    public Rect collisionRect;
 
     public Player(Vector2D position){
         super(position, 0);

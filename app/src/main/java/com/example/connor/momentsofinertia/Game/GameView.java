@@ -100,6 +100,13 @@ public class GameView extends View implements PlayerDeathListener {
 
     public boolean checkCollision(){
 
+       for(GameEntity entity: gameEntities){
+           if(entity instanceof Collidable){
+               if(((Collidable)entity).checkRect(player.collisionRect))
+                   return true;
+           }
+       }
+
        return false; //TODO: revert collisions to old method
     }
 
