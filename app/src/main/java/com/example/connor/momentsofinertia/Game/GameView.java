@@ -71,6 +71,8 @@ public class GameView extends View implements PlayerDeathListener {
 
         update(deltaTime);
 
+        Canvas btmpCanvas = new Canvas(drawBitmap);
+
         Paint paint = new Paint();
         paint.setColor(BACKGROUND_COLOR);
         canvas.drawRect(new Rect(this.getLeft(), this.getTop(),
