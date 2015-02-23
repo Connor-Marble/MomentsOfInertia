@@ -71,18 +71,16 @@ public class GameView extends View implements PlayerDeathListener {
 
         update(deltaTime);
 
-        Canvas btmpCanvas = new Canvas(drawBitmap);
-
         Paint paint = new Paint();
         paint.setColor(BACKGROUND_COLOR);
-        btmpCanvas.drawRect(new Rect(this.getLeft(), this.getTop(),
+        canvas.drawRect(new Rect(this.getLeft(), this.getTop(),
                 this.getRight(), this.getBottom()), paint);
 
         if(DRAW_FRAMERATE)
-            drawFrameRate(btmpCanvas, deltaTime);
+            drawFrameRate(canvas, deltaTime);
 
         for(GameEntity entity: gameEntities){
-            entity.draw((int)xScroll, btmpCanvas, paint);
+            entity.draw((int)xScroll, canvas, paint);
         }
 
         paint.setAlpha(255);
@@ -91,7 +89,6 @@ public class GameView extends View implements PlayerDeathListener {
         if(checkCollision())
             player.death();
 
-        canvas.drawBitmap(drawBitmap, 0, 0, paint);
 
         deltaTime = getDeltaTime();
 
@@ -103,17 +100,7 @@ public class GameView extends View implements PlayerDeathListener {
 
     public boolean checkCollision(){
 
-        //Log.d("color", Integer.toHexString(drawBitmap.getPixel((int) (player.position.x+5 + xScroll), (int) player.position.y+5)));
-
-        if(player.position.x + xScroll > drawBitmap.getWidth() || player.position.x + xScroll < 0)
-            return true;
-
-        if(player.position.y > drawBitmap.getHeight() || player.position.y < 0)
-            return true;
-
-        int colorDif = Math.abs(drawBitmap.getPixel((int) (player.position.x + xScroll), (int) player.position.y) - Color.RED);
-
-        return (colorDif < 5);
+       return false; //TODO: revert collisions to old method
     }
 
     public void update(double deltaTime){
