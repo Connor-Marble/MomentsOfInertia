@@ -109,7 +109,7 @@ public class GameView extends View implements PlayerDeathListener {
            }
        }
 
-       return false; //TODO: revert collisions to old method
+       return false;
     }
 
     public void update(double deltaTime){
