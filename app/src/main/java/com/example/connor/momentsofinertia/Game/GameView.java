@@ -34,8 +34,6 @@ public class GameView extends View implements PlayerDeathListener {
     private int scrollSpeed = 150;
     public Player player;
 
-    private final int COLLISION_THRESHOLD = 150;
-
 
     private long lastUpdate = System.currentTimeMillis();
     final int BACKGROUND_COLOR = Color.BLACK;
@@ -77,14 +75,14 @@ public class GameView extends View implements PlayerDeathListener {
 
         Paint paint = new Paint();
         paint.setColor(BACKGROUND_COLOR);
-        btmpCanvas.drawRect(new Rect(this.getLeft(), this.getTop(),
+        canvas.drawRect(new Rect(this.getLeft(), this.getTop(),
                 this.getRight(), this.getBottom()), paint);
 
         if(DRAW_FRAMERATE)
-            drawFrameRate(btmpCanvas, deltaTime);
+            drawFrameRate(canvas, deltaTime);
 
         for(GameEntity entity: gameEntities){
-            entity.draw((int)xScroll, btmpCanvas, paint);
+            entity.draw((int)xScroll, canvas, paint);
         }
 
         paint.setAlpha(255);
@@ -93,7 +91,6 @@ public class GameView extends View implements PlayerDeathListener {
         if(checkCollision())
             player.death();
 
-        canvas.drawBitmap(drawBitmap, 0, 0, paint);
 
         deltaTime = getDeltaTime();
 
@@ -105,17 +102,14 @@ public class GameView extends View implements PlayerDeathListener {
 
     public boolean checkCollision(){
 
-        //Log.d("color", Integer.toHexString(drawBitmap.getPixel((int) (player.position.x+5 + xScroll), (int) player.position.y+5)));
+       for(GameEntity entity: gameEntities){
+           if(entity instanceof Collidable){
+               if(((Collidable)entity).checkRect(player.collisionRect))
+                   return true;
+           }
+       }
 
-        if(player.position.x + xScroll > drawBitmap.getWidth() || player.position.x + xScroll < 0)
-            return true;
-
-        if(player.position.y > drawBitmap.getHeight() || player.position.y < 0)
-            return true;
-
-        int colorAtPlayer = drawBitmap.getPixel((int) (player.position.x + xScroll), (int) player.position.y);
-
-        return (Color.red(colorAtPlayer) > COLLISION_THRESHOLD);
+       return false; //TODO: revert collisions to old method
     }
 
     public void update(double deltaTime){
