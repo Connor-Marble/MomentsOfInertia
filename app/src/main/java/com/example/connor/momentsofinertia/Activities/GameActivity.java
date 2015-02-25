@@ -24,7 +24,7 @@ import java.util.Random;
  *
  * @see SystemUiHider
  */
-public class FullscreenActivity extends Activity{
+public class GameActivity extends Activity{
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
