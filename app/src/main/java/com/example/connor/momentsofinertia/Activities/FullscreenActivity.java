@@ -87,6 +87,7 @@ public class FullscreenActivity extends Activity{
             Random random = new Random();
             gameView.addEntity(new Obstacle(new Vector2D(i, random.nextDouble() * 1000)));
         }
+
     }
 
 
