@@ -1,5 +1,6 @@
 package com.example.connor.momentsofinertia.Game;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -184,13 +185,8 @@ public class GameView extends View implements PlayerDeathListener {
 
     @Override
     public void onPlayerDeath() {
-        xScroll = 0;
+        ((Activity)this.getContext()).recreate();
+        return;
 
-        for(GameEntity entity: gameEntities){
-            if (entity instanceof BackgroundStar){
-                ((BackgroundStar)entity).rollParams();
-                entity.position.x %=2000;
-            }
-        }
     }
 }
