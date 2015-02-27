@@ -48,7 +48,7 @@ public class Obstacle extends GameEntity implements Collidable {
     }
 
     @Override
-    public boolean RecieveRaycast(Vector2D origin, double angle, double distance) {
+    public boolean recieveRaycast(Vector2D origin, double angle, double distance) {
         return false;
     }
 
