@@ -15,6 +15,7 @@ import android.view.View;
 
 import com.example.connor.momentsofinertia.Game.Entities.BackgroundStar;
 import com.example.connor.momentsofinertia.Game.Entities.GameEntity;
+import com.example.connor.momentsofinertia.Game.Entities.GameStartListener;
 import com.example.connor.momentsofinertia.Game.Entities.Player;
 import com.example.connor.momentsofinertia.util.Vector2D;
 
@@ -42,6 +43,8 @@ public class GameView extends View implements PlayerDeathListener {
     private Bitmap drawBitmap;
 
     double deltaTime;
+
+    private boolean gameStarted = false;
 
     public GameView(Context context) {
         super(context);
@@ -104,7 +107,7 @@ public class GameView extends View implements PlayerDeathListener {
     public boolean checkCollision(){
 
        for(GameEntity entity: gameEntities){
-           if(entity instanceof Collidable){
+           if(entity instanceof Collidable && player!=null){
                if(((Collidable)entity).checkRect(player.collisionRect))
                    return true;
            }
@@ -173,6 +176,11 @@ public class GameView extends View implements PlayerDeathListener {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if(event.getAction() == MotionEvent.ACTION_DOWN){
+
+            if(!gameStarted){
+                startGame();
+            }
+
             Vector2D location = new Vector2D(event.getX() - xScroll, event.getY());
             player.createRope(location);
             return true;
@@ -181,6 +189,21 @@ public class GameView extends View implements PlayerDeathListener {
             player.rope = null;
         }
         return false;
+    }
+
+    private void startGame(){
+        gameStarted = true;
+
+        for(GameEntity entity: gameEntities){
+            if(entity instanceof GameStartListener){
+                ((GameStartListener)entity).gameStarted();
+            }
+        }
+
+        player = new Player(new Vector2D(500d,100d));
+        addEntity(player);
+
+        player.registerDeathListener(this);
     }
 
     @Override
