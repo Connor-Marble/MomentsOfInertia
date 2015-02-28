@@ -193,7 +193,7 @@ public class GameView extends View implements PlayerDeathListener {
 
     private void startGame(){
         gameStarted = true;
-
+        xScroll = 0;
         for(GameEntity entity: gameEntities){
             if(entity instanceof GameStartListener){
                 ((GameStartListener)entity).gameStarted();
