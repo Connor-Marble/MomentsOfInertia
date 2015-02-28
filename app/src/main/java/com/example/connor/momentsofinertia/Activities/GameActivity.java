@@ -75,17 +75,14 @@ public class GameActivity extends Activity{
         // are available.
         final View view = findViewById(R.id.game_view);
         GameView gameView = (GameView)view;
-        Player player = new Player(new Vector2D(500d,100d));
-        gameView.addEntity(player);
-        gameView.player = player;
-        player.registerDeathListener(gameView);
+
 
         for(int i =0; i<4000; i+=100){
 
             gameView.addEntity(new BackgroundStar(new Vector2D(i,0)));
 
             Random random = new Random();
-            gameView.addEntity(new Obstacle(new Vector2D(i, random.nextDouble() * 1000)));
+            gameView.addEntity(new Obstacle(new Vector2D(i + 1000, random.nextDouble() * 1000)));
         }
 
     }

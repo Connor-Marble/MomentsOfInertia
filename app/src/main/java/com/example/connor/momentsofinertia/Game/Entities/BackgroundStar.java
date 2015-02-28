@@ -13,11 +13,13 @@ import java.util.Random;
 /**
  * Created by connor on 2/5/15.
  */
-public class BackgroundStar extends GameEntity {
+public class BackgroundStar extends GameEntity implements GameStartListener {
 
     public double distance;
     public int size;
     public double opacity;
+    public int drawnX;
+
 
     Random random;
 
@@ -47,6 +49,7 @@ public class BackgroundStar extends GameEntity {
         paint.setColor(Color.WHITE);
         paint.setAlpha((int)(opacity * 255d));
         canvas.drawRect(new Rect(scroll + (int)position.x, (int)position.y, scroll + size + (int)position.x,(int)position.y + size ),paint);
+        drawnX = scroll + (int)position.x;
     }
 
     public void deathCheck(int xScroll){
@@ -57,5 +60,10 @@ public class BackgroundStar extends GameEntity {
             scroll = (int)((double)xScroll * (distance/2 + 0.5));
             position.x = 2000-scroll;
         }
+    }
+
+    @Override
+    public void gameStarted() {
+        position.x = drawnX;
     }
 }

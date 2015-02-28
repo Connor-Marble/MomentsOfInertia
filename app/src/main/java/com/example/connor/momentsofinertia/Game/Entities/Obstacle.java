@@ -12,16 +12,16 @@ import com.example.connor.momentsofinertia.util.Vector2D;
 /**
  * Created by connor on 2/6/15.
  */
-public class Obstacle extends GameEntity implements Collidable {
+public class Obstacle extends GameEntity implements Collidable, GameStartListener {
     public Rect collisionRect;
     private double colorModifier = 0d;
+    private double sizeMultiplier = 0d;
+    private double inflateTime = 0.25d;
+    private boolean hasGameStarted = false;
 
     public Obstacle(Vector2D position) {
         super(position, 0);
-        collisionRect = new Rect((int)position.x, (int)position.y,
-                (int)position.x + 75, (int)position.y+75);
-
-
+        setCollisionRect();
     }
 
     public Obstacle(Vector2D position, Rect collisionRect) {
@@ -49,9 +49,22 @@ public class Obstacle extends GameEntity implements Collidable {
         return true;
     }
 
+    private void setCollisionRect(){
+        collisionRect = new Rect((int)(position.x-(75d*sizeMultiplier/2)), (int)(position.y-(75d*sizeMultiplier/2)),
+                (int)(position.x + (75d*sizeMultiplier/2)), (int)(position.y+(75d*sizeMultiplier/2)));
+    }
+
     @Override
-    public boolean RecieveRaycast(Vector2D origin, double angle, double distance) {
+    public boolean recieveRaycast(Vector2D origin, double angle, double distance) {
         return false;
+    }
+
+    @Override
+    public void update(double deltaTime){
+        if(sizeMultiplier<1 && hasGameStarted){
+            sizeMultiplier+=deltaTime/inflateTime;
+            setCollisionRect();
+        }
     }
 
     @Override
@@ -61,5 +74,10 @@ public class Obstacle extends GameEntity implements Collidable {
         paint.setARGB(255, 255, 255-red, 0);
         canvas.drawRect(new Rect(collisionRect.left + scroll, collisionRect.top, collisionRect.right + scroll,collisionRect.bottom), paint);
 
+    }
+
+    @Override
+    public void gameStarted() {
+        hasGameStarted = true;
     }
 }
