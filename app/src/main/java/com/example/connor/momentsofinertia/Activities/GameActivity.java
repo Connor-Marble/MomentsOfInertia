@@ -82,7 +82,7 @@ public class GameActivity extends Activity{
             gameView.addEntity(new BackgroundStar(new Vector2D(i,0)));
 
             Random random = new Random();
-            gameView.addEntity(new Obstacle(new Vector2D(i, random.nextDouble() * 1000)));
+            gameView.addEntity(new Obstacle(new Vector2D(i + 1000, random.nextDouble() * 1000)));
         }
 
     }
