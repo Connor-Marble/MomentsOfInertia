@@ -10,11 +10,10 @@ import com.example.connor.momentsofinertia.util.Vector2D;
 /**
  * Created by connor on 1/30/15.
  */
-public class GameEntity implements Comparable{
+public abstract class GameEntity implements Comparable{
     GameView parentView;
     public Vector2D position;
     private int depth;
-    protected Bitmap sprite;
     public boolean isRemoved = false;
 
     public GameEntity(Vector2D position){
@@ -27,13 +26,9 @@ public class GameEntity implements Comparable{
         this.depth = depth;
     }
 
-    public void draw(int xScroll, Canvas canvas, Paint paint){
-        canvas.drawBitmap(sprite, (float)position.x, (float)position.y, paint);
-    }
+    public abstract void draw(int xScroll, Canvas canvas, Paint paint);
 
-    public void update(double deltaTime){
-
-    }
+    public abstract void update(double deltaTime);
 
     public void setParentView(GameView view){
         parentView = view;
