@@ -42,4 +42,8 @@ public class Vector2D {
 
         return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
     }
+
+    public Vector2D clone(){
+        return new Vector2D(this.x, this.y);
+    }
 }

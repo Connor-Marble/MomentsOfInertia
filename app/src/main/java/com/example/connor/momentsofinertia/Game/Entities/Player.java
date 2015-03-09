@@ -62,8 +62,6 @@ public class Player extends GameEntity {
         position.y += velocity.y * deltaTime;
         position.x += velocity.x * deltaTime;
 
-        parentView.addEntity(new PlayerTrail(new Vector2D(position.x, position.y)));
-
         collisionRect = new Rect((int)position.x-5, (int)position.y-5,
                 (int)position.x+5, (int)position.y + 5);
 

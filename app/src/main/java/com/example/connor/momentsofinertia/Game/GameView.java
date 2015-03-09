@@ -16,7 +16,9 @@ import android.view.View;
 import com.example.connor.momentsofinertia.Game.Entities.BackgroundStar;
 import com.example.connor.momentsofinertia.Game.Entities.GameEntity;
 import com.example.connor.momentsofinertia.Game.Entities.GameStartListener;
+import com.example.connor.momentsofinertia.Game.Entities.Obstacle;
 import com.example.connor.momentsofinertia.Game.Entities.Player;
+import com.example.connor.momentsofinertia.Game.Entities.Trail;
 import com.example.connor.momentsofinertia.util.Vector2D;
 
 import java.util.Collections;
@@ -204,6 +206,7 @@ public class GameView extends View implements PlayerDeathListener {
         addEntity(player);
 
         player.registerDeathListener(this);
+        addEntity(new Trail(1,50, player, 5f));
     }
 
     @Override
