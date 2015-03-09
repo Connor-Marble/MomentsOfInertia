@@ -1,6 +1,7 @@
 package com.example.connor.momentsofinertia.util;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -13,12 +14,14 @@ public class FixedRingQueue<E> {
     private int length;
     private int arrayStart;
     private int count;
+    private int numberAdded;
     private E[] data;
 
     public FixedRingQueue(int size){
         this.length = size;
         data = (E[])new Object[size];
         count=0;
+        numberAdded = 0;
         arrayStart = size-1;
     }
 
@@ -27,11 +30,11 @@ public class FixedRingQueue<E> {
             return false;
         }
 
-        arrayStart = getDataIndex(count);
+        arrayStart = getDataIndex(numberAdded);
+        if(data[arrayStart] == null)
+            count++;
 
-        count++;
-        count %= length;
-
+        numberAdded ++;
         data[arrayStart] = (E)object;
 
         return true;
@@ -66,11 +69,14 @@ public class FixedRingQueue<E> {
     }
 
     private int getDataIndex(int absoluteIndex){
-        return (length - absoluteIndex)%length;
-
+        int result = (absoluteIndex)%length;
+        if(result < 0){
+            result += length;
+        }
+        return result;
     }
 
     public E get(int index){
-        return data[getDataIndex(index)];
+        return data[getDataIndex(numberAdded - index -1)];
     }
 }
