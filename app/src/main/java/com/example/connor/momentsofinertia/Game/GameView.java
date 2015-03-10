@@ -7,16 +7,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.connor.momentsofinertia.Game.Entities.BackgroundStar;
 import com.example.connor.momentsofinertia.Game.Entities.GameEntity;
 import com.example.connor.momentsofinertia.Game.Entities.GameStartListener;
-import com.example.connor.momentsofinertia.Game.Entities.Obstacle;
 import com.example.connor.momentsofinertia.Game.Entities.Player;
 import com.example.connor.momentsofinertia.Game.Entities.Trail;
 import com.example.connor.momentsofinertia.util.Vector2D;
@@ -33,7 +29,9 @@ public class GameView extends View implements PlayerDeathListener {
     private Vector2D cameraPosition;
     private LinkedList<GameEntity> gameEntities;
     private LinkedList<GameEntity> newEntities;
+
     double xScroll = 0;
+    private double elapsedTime = 0d;
 
     private int scrollSpeed = 150;
     public Player player;
@@ -128,6 +126,9 @@ public class GameView extends View implements PlayerDeathListener {
 
         if(newEntities.size() > 0)
             createNewEntities();
+
+        if(gameStarted)
+            elapsedTime += deltaTime;
     }
 
     public void drawFrameRate(Canvas canvas, double deltaTime){
@@ -141,6 +142,12 @@ public class GameView extends View implements PlayerDeathListener {
 
         newEntities.add(newEntity);
         newEntity.setParentView(this);
+
+        if(gameStarted){
+            if(newEntity instanceof GameStartListener){
+                ((GameStartListener)newEntity).gameStarted();
+            }
+        }
     }
 
     public double getDeltaTime(){
@@ -214,5 +221,9 @@ public class GameView extends View implements PlayerDeathListener {
         ((Activity)this.getContext()).recreate();
         return;
 
+    }
+
+    public double getTime(){
+        return elapsedTime;
     }
 }
