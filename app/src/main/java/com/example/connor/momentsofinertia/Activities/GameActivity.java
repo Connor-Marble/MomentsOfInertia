@@ -27,27 +27,8 @@ import java.util.Random;
  * @see SystemUiHider
  */
 public class GameActivity extends Activity{
-    /**
-     * Whether or not the system UI should be auto-hidden after
-     * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
-     */
-    private static final boolean AUTO_HIDE = true;
 
-    /**
-     * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
-     * user interaction before hiding the system UI.
-     */
-    private static final int AUTO_HIDE_DELAY_MILLIS = 3000;
-
-    /**
-     * The flags to pass to {@link SystemUiHider#getInstance}.
-     */
-    private static final int HIDER_FLAGS = SystemUiHider.FLAG_HIDE_NAVIGATION;
-
-    /**
-     * The instance of the {@link SystemUiHider} for this activity.
-     */
-    private SystemUiHider mSystemUiHider;
+    private GameView gameView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,26 +38,27 @@ public class GameActivity extends Activity{
 
         setContentView(R.layout.activity_fullscreen);
 
+        this.gameView = (GameView)findViewById(R.id.game_view);
 
+    }
 
-        final View gameView = findViewById(R.id.game_view);
+    @Override
+    protected void onPause(){
+        super.onPause();
+        gameView.isRunning = false;
+    }
 
-
-
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
+    @Override
+    protected void onResume(){
+        super.onResume();
+        gameView.isRunning = true;
+        gameView.lastUpdate = System.currentTimeMillis();
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-        // Trigger the initial hide() shortly after the activity has been
-        // created, to briefly hint to the user that UI controls
-        // are available.
-        final View view = findViewById(R.id.game_view);
-        GameView gameView = (GameView)view;
         gameView.addEntity(new TitleText(new Vector2D(0, 0), gameView));
         ObstacleSpawner spawner = new ObstacleSpawner(new Vector2D(0, 0));
         gameView.addEntity(spawner);

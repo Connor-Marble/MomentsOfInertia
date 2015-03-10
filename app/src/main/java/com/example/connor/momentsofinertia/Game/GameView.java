@@ -37,7 +37,7 @@ public class GameView extends View implements PlayerDeathListener {
     public Player player;
 
 
-    private long lastUpdate = System.currentTimeMillis();
+    public long lastUpdate = System.currentTimeMillis();
     final int BACKGROUND_COLOR = Color.BLACK;
     final boolean DRAW_FRAMERATE = false;
     private Bitmap drawBitmap;
@@ -45,6 +45,7 @@ public class GameView extends View implements PlayerDeathListener {
     double deltaTime;
 
     private boolean gameStarted = false;
+    public boolean isRunning = false;
 
     public GameView(Context context) {
         super(context);
@@ -72,6 +73,8 @@ public class GameView extends View implements PlayerDeathListener {
 
     public void onDraw(Canvas canvas){
 
+        if(!isRunning)
+            return;
 
         update(deltaTime);
 
