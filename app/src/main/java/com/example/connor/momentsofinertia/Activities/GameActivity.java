@@ -1,6 +1,7 @@
 package com.example.connor.momentsofinertia.Activities;
 
 import com.example.connor.momentsofinertia.Game.Entities.BackgroundStar;
+import com.example.connor.momentsofinertia.Game.Entities.ObstacleSpawner;
 import com.example.connor.momentsofinertia.Game.Entities.TitleText;
 import com.example.connor.momentsofinertia.Game.GameView;
 import com.example.connor.momentsofinertia.Game.Entities.Obstacle;
@@ -77,13 +78,11 @@ public class GameActivity extends Activity{
         final View view = findViewById(R.id.game_view);
         GameView gameView = (GameView)view;
         gameView.addEntity(new TitleText(new Vector2D(0, 0), gameView));
+        ObstacleSpawner spawner = new ObstacleSpawner(new Vector2D(0, 0));
+        gameView.addEntity(spawner);
 
         for(int i =0; i<4000; i+=100){
-
-            gameView.addEntity(new BackgroundStar(new Vector2D(i,0)));
-
-            Random random = new Random();
-            gameView.addEntity(new Obstacle(new Vector2D(i + 1000, random.nextDouble() * 1000)));
+            gameView.addEntity(new BackgroundStar(new Vector2D(i,0)));;
         }
 
     }

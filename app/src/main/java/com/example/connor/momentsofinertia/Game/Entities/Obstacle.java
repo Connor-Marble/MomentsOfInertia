@@ -14,7 +14,6 @@ import com.example.connor.momentsofinertia.util.Vector2D;
  */
 public class Obstacle extends GameEntity implements Collidable, GameStartListener {
     public Rect collisionRect;
-    private double colorModifier = 0d;
     private double sizeMultiplier = 0d;
     private double inflateTime = 0.25d;
     private boolean hasGameStarted = false;
@@ -69,8 +68,7 @@ public class Obstacle extends GameEntity implements Collidable, GameStartListene
 
     @Override
     public void draw(int scroll, Canvas canvas, Paint paint){
-        colorModifier -= 2d;
-        int red = (int)(Math.sin(colorModifier/100d+position.x)*64d) + 192;
+        int red = (int)(Math.sin(parentView.getTime()*5+(position.x/200d))*64d) + 192;
         paint.setARGB(255, 255, 255-red, 0);
         canvas.drawRect(new Rect(collisionRect.left + scroll, collisionRect.top, collisionRect.right + scroll,collisionRect.bottom), paint);
 
