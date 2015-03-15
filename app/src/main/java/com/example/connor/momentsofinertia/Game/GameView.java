@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.connor.momentsofinertia.Game.Entities.GameEntity;
 import com.example.connor.momentsofinertia.Game.Entities.GameStartListener;
 import com.example.connor.momentsofinertia.Game.Entities.Player;
+import com.example.connor.momentsofinertia.Game.Entities.ScoreLineTracker;
 import com.example.connor.momentsofinertia.Game.Entities.Trail;
 import com.example.connor.momentsofinertia.util.Vector2D;
 
@@ -220,7 +221,9 @@ public class GameView extends View implements PlayerDeathListener {
         addEntity(player);
 
         player.registerDeathListener(this);
+
         addEntity(new Trail(1,50, player, 5f));
+        addEntity(new ScoreLineTracker(new Vector2D(0,getHeight()), player, new Vector2D(10,10)));
     }
 
     @Override

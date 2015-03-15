@@ -69,7 +69,7 @@ public class Player extends GameEntity {
         collisionRect = new Rect((int)position.x-5, (int)position.y-5,
                 (int)position.x+5, (int)position.y + 5);
 
-        if (position.y > 1000)
+        if (position.y > parentView.getHeight())
             death();
         if((int)position.x > score){
             updateScore();
