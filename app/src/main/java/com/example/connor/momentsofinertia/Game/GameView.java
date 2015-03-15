@@ -10,10 +10,12 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.connor.momentsofinertia.Game.Entities.GameEntity;
 import com.example.connor.momentsofinertia.Game.Entities.GameStartListener;
 import com.example.connor.momentsofinertia.Game.Entities.Player;
+import com.example.connor.momentsofinertia.Game.Entities.ScoreLineTracker;
 import com.example.connor.momentsofinertia.Game.Entities.Trail;
 import com.example.connor.momentsofinertia.util.Vector2D;
 
@@ -46,6 +48,8 @@ public class GameView extends View implements PlayerDeathListener {
 
     private boolean gameStarted = false;
     public boolean isRunning = false;
+
+    private TextView scoreView;
 
     public GameView(Context context) {
         super(context);
@@ -213,10 +217,14 @@ public class GameView extends View implements PlayerDeathListener {
         }
 
         player = new Player(new Vector2D(500d,100d));
+        player.setScoreView(scoreView);
         addEntity(player);
 
         player.registerDeathListener(this);
+
         addEntity(new Trail(1,50, player, 5f));
+        addEntity(new ScoreLineTracker(new Vector2D(0,getHeight()), player, new Vector2D(10,10)));
+        addEntity(new ScoreLineTracker(new Vector2D(0,0), player, new Vector2D(10,-10)));
     }
 
     @Override
@@ -224,6 +232,10 @@ public class GameView extends View implements PlayerDeathListener {
         ((Activity)this.getContext()).recreate();
         return;
 
+    }
+
+    public void setScoreView(TextView scoreView){
+        this.scoreView = scoreView;
     }
 
     public double getTime(){
