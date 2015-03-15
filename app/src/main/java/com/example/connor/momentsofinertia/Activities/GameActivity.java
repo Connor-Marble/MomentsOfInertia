@@ -16,6 +16,7 @@ import android.os.Bundle;
 
 import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 
 import java.util.Random;
 
@@ -40,6 +41,7 @@ public class GameActivity extends Activity{
 
         this.gameView = (GameView)findViewById(R.id.game_view);
 
+        gameView.setScoreView((TextView)findViewById(R.id.ScoreView));
     }
 
     @Override

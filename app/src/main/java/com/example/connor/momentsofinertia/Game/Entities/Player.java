@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.widget.TextView;
 
 import com.example.connor.momentsofinertia.Game.PlayerDeathListener;
 import com.example.connor.momentsofinertia.util.Vector2D;
@@ -24,6 +25,9 @@ public class Player extends GameEntity {
     private ArrayList<PlayerDeathListener> deathListeners;
 
     public Rect collisionRect;
+
+    private int score;
+    private TextView scoreView;
 
     public Player(Vector2D position){
         super(position, 0);
@@ -67,6 +71,9 @@ public class Player extends GameEntity {
 
         if (position.y > 1000)
             death();
+        if((int)position.x > score){
+            updateScore();
+        }
     }
 
     private void addTension(double deltaTime){
@@ -102,5 +109,14 @@ public class Player extends GameEntity {
     public void checkObstacle(Obstacle obstacle){
         if(obstacle.checkRect(collisionRect))
             death();
+    }
+
+    private void updateScore(){
+        score = (int)position.x;
+        scoreView.setText("Score: " + Integer.toString((score- 500)/100));
+    }
+
+    public void setScoreView(TextView scoreView){
+        this.scoreView = scoreView;
     }
 }
