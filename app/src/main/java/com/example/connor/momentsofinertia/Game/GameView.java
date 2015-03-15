@@ -224,6 +224,7 @@ public class GameView extends View implements PlayerDeathListener {
 
         addEntity(new Trail(1,50, player, 5f));
         addEntity(new ScoreLineTracker(new Vector2D(0,getHeight()), player, new Vector2D(10,10)));
+        addEntity(new ScoreLineTracker(new Vector2D(0,0), player, new Vector2D(10,-10)));
     }
 
     @Override
