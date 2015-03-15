@@ -17,6 +17,7 @@ public class Obstacle extends GameEntity implements Collidable, GameStartListene
     private double sizeMultiplier = 0d;
     private double inflateTime = 0.25d;
     private boolean hasGameStarted = false;
+    int outlineWidth = 5;
 
     public Obstacle(Vector2D position) {
         super(position, 0);
@@ -68,10 +69,26 @@ public class Obstacle extends GameEntity implements Collidable, GameStartListene
 
     @Override
     public void draw(int scroll, Canvas canvas, Paint paint){
-        int red = (int)(Math.sin(parentView.getTime()*5+(position.x/200d))*64d) + 192;
-        paint.setARGB(255, 255, 255-red, 0);
-        canvas.drawRect(new Rect(collisionRect.left + scroll, collisionRect.top, collisionRect.right + scroll,collisionRect.bottom), paint);
 
+        int colorMod = (int)(Math.sin(parentView.getTime()*5+(position.x/200d))*64d) + 192;
+
+        drawOutline(scroll, canvas, paint);
+
+        paint.setARGB(255, 255, 255-colorMod, 0);
+        canvas.drawRect(new Rect(collisionRect.left + scroll, collisionRect.top, collisionRect.right + scroll,collisionRect.bottom), paint);
+    }
+
+    public void drawOutline(int scroll, Canvas canvas, Paint paint){
+        paint.setARGB(255, 64, 64, 64);
+        canvas.drawRect(new Rect(collisionRect.left + scroll -outlineWidth,
+                collisionRect.top - outlineWidth,
+                collisionRect.right + scroll + outlineWidth,
+                collisionRect.bottom + outlineWidth), paint);
+    }
+
+    public void deathCheck(int xScroll){
+        if(collisionRect.right + xScroll < 0)
+            remove();
     }
 
     @Override

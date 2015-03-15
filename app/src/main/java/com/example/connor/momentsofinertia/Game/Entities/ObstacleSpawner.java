@@ -10,12 +10,13 @@ import java.util.Random;
 /**
  * Created by connor on 3/9/15.
  */
-public class ObstacleSpawner extends GameEntity {
+public class ObstacleSpawner extends GameEntity implements GameStartListener {
 
     int xLocation = 600;
     Random random;
     float spawnChance = 0.01f;
     int height = 1000;
+    private boolean gameStarted = false;
 
     public ObstacleSpawner(Vector2D position) {
         super(new Vector2D(0d, 0d));
@@ -24,7 +25,7 @@ public class ObstacleSpawner extends GameEntity {
 
     @Override
     public void draw(int xScroll, Canvas canvas, Paint paint) {
-        while((-xScroll)+2000 > xLocation){
+        while((-xScroll)+2000 > xLocation && gameStarted){
             advance(1, spawnChance);
         }
     }
@@ -39,5 +40,10 @@ public class ObstacleSpawner extends GameEntity {
         if(random.nextFloat() < probability){
             parentView.addEntity(new Obstacle(new Vector2D(xLocation, random.nextInt(height))));
         }
+    }
+
+    @Override
+    public void gameStarted() {
+        gameStarted = true;
     }
 }
