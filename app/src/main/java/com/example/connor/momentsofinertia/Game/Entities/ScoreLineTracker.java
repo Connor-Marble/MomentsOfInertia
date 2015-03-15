@@ -15,7 +15,7 @@ public class ScoreLineTracker extends GameEntity {
     Vector2D size;
 
     public ScoreLineTracker(Vector2D position, Player player, Vector2D size) {
-        super(position, 0);
+        super(position, -1);
         this.player = player;
         this.size = size;
     }
