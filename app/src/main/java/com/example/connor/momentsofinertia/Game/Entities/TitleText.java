@@ -40,7 +40,7 @@ public class TitleText extends GameEntity implements GameStartListener {
             opacity -= (255d/fadeLength)*deltaTime;
 
         if(opacity <=0){
-            parentView.removeEntity(this);
+            remove();
         }
     }
 

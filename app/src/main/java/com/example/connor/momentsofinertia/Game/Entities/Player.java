@@ -98,8 +98,6 @@ public class Player extends GameEntity {
     public void death(){
         notifyDeathListeners();
         velocity = new Vector2D(0, 0);
-        position.y = 0d;
-        position.x = 400;
     }
 
     public void createRope(Vector2D touchPosition){
