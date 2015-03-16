@@ -1,6 +1,7 @@
 package com.example.connor.momentsofinertia.Activities;
 
 import com.example.connor.momentsofinertia.Game.Entities.BackgroundStar;
+import com.example.connor.momentsofinertia.Game.Entities.FadeOverlay;
 import com.example.connor.momentsofinertia.Game.Entities.ObstacleSpawner;
 import com.example.connor.momentsofinertia.Game.Entities.TitleText;
 import com.example.connor.momentsofinertia.Game.GameView;
@@ -58,6 +59,8 @@ public class GameActivity extends Activity{
 
         gameView.isRunning = true;
         gameView.lastUpdate = System.currentTimeMillis();
+
+        gameView.addEntity(new FadeOverlay(gameView.getWidth(), gameView.getHeight()));
     }
 
     @Override

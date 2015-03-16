@@ -49,6 +49,8 @@ public class GameView extends View implements PlayerDeathListener {
     private boolean gameStarted = false;
     public boolean isRunning = false;
 
+    public boolean gameOver;
+
     private TextView scoreView;
 
     public GameView(Context context) {
@@ -106,8 +108,11 @@ public class GameView extends View implements PlayerDeathListener {
         deltaTime = getDeltaTime();
 
         lastUpdate = System.currentTimeMillis();
-        this.invalidate();
 
+        if(gameOver)
+            restartGame();
+
+        this.invalidate();
 
     }
 
@@ -210,11 +215,7 @@ public class GameView extends View implements PlayerDeathListener {
     private void startGame(){
         gameStarted = true;
         xScroll = 0;
-        for(GameEntity entity: gameEntities){
-            if(entity instanceof GameStartListener){
-                ((GameStartListener)entity).gameStarted();
-            }
-        }
+
 
         player = new Player(new Vector2D(500d,100d));
         player.setScoreView(scoreView);
@@ -225,13 +226,26 @@ public class GameView extends View implements PlayerDeathListener {
         addEntity(new Trail(1,50, player, 5f));
         addEntity(new ScoreLineTracker(new Vector2D(0,getHeight()), player, new Vector2D(10,10)));
         addEntity(new ScoreLineTracker(new Vector2D(0,0), player, new Vector2D(10,-10)));
+
+        for(GameEntity entity: gameEntities){
+            if(entity instanceof GameStartListener){
+                ((GameStartListener)entity).gameStarted();
+            }
+            if(entity instanceof PlayerDeathListener){
+                player.registerDeathListener((PlayerDeathListener)entity);
+            }
+        }
     }
 
     @Override
     public void onPlayerDeath() {
-        ((Activity)this.getContext()).recreate();
+        //((Activity)this.getContext()).recreate();
         return;
 
+    }
+
+    public void restartGame(){
+        ((Activity)this.getContext()).recreate();
     }
 
     public void setScoreView(TextView scoreView){
