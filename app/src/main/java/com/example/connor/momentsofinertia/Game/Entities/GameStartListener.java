@@ -20,8 +20,13 @@
 package com.example.connor.momentsofinertia.Game.Entities;
 
 /**
+ * Interface used to notify objects of the game starting
+ *
  * Created by connor on 2/26/15.
  */
 public interface GameStartListener {
+    /**
+     * called on game start
+     */
     public void gameStarted();
 }

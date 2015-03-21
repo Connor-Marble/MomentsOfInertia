@@ -27,6 +27,11 @@ import com.example.connor.momentsofinertia.Game.GameView;
 import com.example.connor.momentsofinertia.util.Vector2D;
 
 /**
+ * Base class for all game entities.
+ * this class should be extended by
+ * things that are drawn as part of the
+ * game view.
+ *
  * Created by connor on 1/30/15.
  */
 public abstract class GameEntity implements Comparable{

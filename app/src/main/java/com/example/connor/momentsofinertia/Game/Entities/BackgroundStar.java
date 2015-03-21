@@ -31,6 +31,8 @@ import java.util.Random;
 
 /**
  * Created by connor on 2/5/15.
+ *
+ * A decorative game entity which draws a 'star' in the background
  */
 public class BackgroundStar extends GameEntity implements GameStartListener {
 
@@ -47,6 +49,10 @@ public class BackgroundStar extends GameEntity implements GameStartListener {
         rollParams();
     }
 
+    /**
+     * randomly resets the parameters and
+     * resets the star to the right side
+     */
     public void rollParams(){
         random = new Random();
         distance = random.nextDouble();
@@ -60,6 +66,15 @@ public class BackgroundStar extends GameEntity implements GameStartListener {
 
     }
 
+    /**
+     * draws the star as a white rectangle
+     * the star is offset and scaled based
+     * on distance to create a 3D parallax effect
+     *
+     * @param xScroll
+     * @param canvas
+     * @param paint
+     */
     @Override
     public void draw(int xScroll, Canvas canvas, Paint paint){
         deathCheck(xScroll);
@@ -71,6 +86,10 @@ public class BackgroundStar extends GameEntity implements GameStartListener {
         drawnX = scroll + (int)position.x;
     }
 
+    /**
+     * resets the star if it has scrolled off screen
+     * @param xScroll the horizontal scroll of the camera
+     */
     public void deathCheck(int xScroll){
         int scroll = (int)((double)xScroll * (distance/2 + 0.5));
         if(scroll + (int)position.x + size < 0){

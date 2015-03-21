@@ -29,6 +29,8 @@ import com.example.connor.momentsofinertia.Game.Entities.GameEntity;
 import com.example.connor.momentsofinertia.util.Vector2D;
 
 /**
+ * Game entity that the player must avoid
+ *
  * Created by connor on 2/6/15.
  */
 public class Obstacle extends GameEntity implements Collidable, GameStartListener {

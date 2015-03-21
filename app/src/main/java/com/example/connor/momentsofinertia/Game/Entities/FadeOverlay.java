@@ -28,6 +28,10 @@ import com.example.connor.momentsofinertia.util.Vector2D;
 
 /**
  * Created by connor on 3/1/15.
+ *
+ * Game entity that is drawn as a black rectangle over the rest of the gameview
+ * such that the game fades in from black when starting and fades out then the player
+ * dies
  */
 public class FadeOverlay extends GameEntity implements PlayerDeathListener{
 
@@ -36,6 +40,15 @@ public class FadeOverlay extends GameEntity implements PlayerDeathListener{
     private boolean fadein;
     private double fadeTime = 1d;
 
+    /**
+     * Overlay initialized at 0,0 and a depth of -10
+     * fadein and opacity are initialli true and 1 respectively,
+     * such that the screen is completely black but
+     * fading in when the game starts
+     *
+     * @param width the initial screen width
+     * @param height the initial screen height
+     */
     public FadeOverlay(int width, int height) {
         super(new Vector2D(0, 0), -10);
         this.width = width;
@@ -43,6 +56,10 @@ public class FadeOverlay extends GameEntity implements PlayerDeathListener{
         fadein = true;
     }
 
+    /**
+     * increase opacity if fading out, decrease opacity if fading in
+     * @param deltaTime
+     */
     @Override
     public void update(double deltaTime) {
 
@@ -57,6 +74,13 @@ public class FadeOverlay extends GameEntity implements PlayerDeathListener{
         }
     }
 
+    /**
+     * draws black rectangle over the entire screen.
+     *
+     * @param xScroll
+     * @param canvas
+     * @param paint
+     */
     @Override
     public void draw(int xScroll, Canvas canvas, Paint paint){
         if(opacity < 0d)
@@ -71,6 +95,9 @@ public class FadeOverlay extends GameEntity implements PlayerDeathListener{
         }
     }
 
+    /**
+     * begin fadeout when the player dies
+     */
     @Override
     public void onPlayerDeath() {
         fadein = false;

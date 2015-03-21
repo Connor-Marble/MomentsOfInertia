@@ -40,7 +40,13 @@ import android.widget.TextView;
 
 import java.util.Random;
 
-
+/**
+ * The main game activity. This activity
+ * holds the game view and score display.
+ *
+ * It should start when the app is run, and
+ * restart when the player dies or the game otherwise ends.
+ */
 public class GameActivity extends Activity{
 
     private GameView gameView;
@@ -58,12 +64,18 @@ public class GameActivity extends Activity{
         gameView.setScoreView((TextView)findViewById(R.id.ScoreView));
     }
 
+    /**Stops the gameview from updating
+    * when the activity is paused
+    */
     @Override
     protected void onPause(){
         super.onPause();
         gameView.isRunning = false;
     }
 
+    /**
+     * restarts the gameview when activity is resumed
+     */
     @Override
     protected void onResume(){
         super.onResume();
@@ -76,6 +88,12 @@ public class GameActivity extends Activity{
         gameView.addEntity(new FadeOverlay(gameView.getWidth(), gameView.getHeight()));
     }
 
+    /**
+     * sets up the game when the activity is started
+     *
+     * creates background stars and obstacles
+     * @param savedInstanceState
+     */
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -90,6 +108,11 @@ public class GameActivity extends Activity{
 
     }
 
+    /**
+     *
+     * @return int which will properly hide the
+     * ui when passed to setSystemUIVisibility()
+     */
     private int getUIFlags() {
         return View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 |View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
