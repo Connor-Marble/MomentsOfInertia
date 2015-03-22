@@ -90,7 +90,7 @@ public class FadeOverlay extends GameEntity implements PlayerDeathListener{
         paint.setAlpha((int)(Math.min(opacity, 1d)*255d));
         canvas.drawRect(0, 0, width, height, paint);
 
-        if(opacity > 1d && !fadein){
+        if(opacity >= 1d && !fadein){
             parentView.gameOver = true;
         }
     }
