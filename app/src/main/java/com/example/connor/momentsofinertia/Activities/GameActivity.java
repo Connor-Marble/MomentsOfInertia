@@ -85,7 +85,7 @@ public class GameActivity extends Activity{
         gameView.isRunning = true;
         gameView.lastUpdate = System.currentTimeMillis();
 
-        gameView.addEntity(new FadeOverlay(gameView.getWidth(), gameView.getHeight()));
+
     }
 
     /**
@@ -105,6 +105,8 @@ public class GameActivity extends Activity{
         for(int i =0; i<4000; i+=100){
             gameView.addEntity(new BackgroundStar(new Vector2D(i,0)));;
         }
+
+        gameView.addEntity(new FadeOverlay(gameView.getWidth(), gameView.getHeight()));
 
     }
 
