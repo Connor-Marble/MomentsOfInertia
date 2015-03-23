@@ -47,6 +47,7 @@ public class Player extends GameEntity {
 
     public int score;
     private TextView scoreView;
+    private int drawnX;
 
     public Player(Vector2D position){
         super(position, 0);
@@ -62,7 +63,7 @@ public class Player extends GameEntity {
                 (int)position.x+5 + xScroll, (int)position.y + 5), paint);
         if(rope != null)
             drawRope(xScroll, canvas, paint);
-
+        drawnX = xScroll + (int)position.x;
     }
 
     public void drawRope(int xScroll, Canvas canvas, Paint paint){
@@ -88,11 +89,18 @@ public class Player extends GameEntity {
         collisionRect = new Rect((int)position.x-5, (int)position.y-5,
                 (int)position.x+5, (int)position.y + 5);
 
-        if (position.y > parentView.getHeight())
+        if (!isInBounds())
             death();
         if((int)position.x > score){
             updateScore();
         }
+    }
+
+    private boolean isInBounds(){
+        return position.y < parentView.getHeight()&&
+                position.y > 0&&
+                drawnX > 0&&
+               drawnX < parentView.getWidth();
     }
 
     private void addTension(double deltaTime){
