@@ -72,6 +72,9 @@ public class GameView extends View implements PlayerDeathListener {
 
     private TextView scoreView;
 
+    private float difficulty = 1f;
+    private float diffRamp = 1f/60f;
+
     public GameView(Context context) {
         super(context);
         initialize();
@@ -148,7 +151,7 @@ public class GameView extends View implements PlayerDeathListener {
     }
 
     public void update(double deltaTime){
-        xScroll -= scrollSpeed * deltaTime;
+        xScroll -= ((double)scrollSpeed) * deltaTime;
         for(GameEntity entity: gameEntities){
             entity.update(deltaTime);
         }
@@ -160,6 +163,11 @@ public class GameView extends View implements PlayerDeathListener {
 
         if(gameStarted)
             elapsedTime += deltaTime;
+
+        if(gameStarted) {
+            difficulty += deltaTime * diffRamp;
+        }
+        scrollSpeed = (int) (difficulty * 150);
     }
 
     public void drawFrameRate(Canvas canvas, double deltaTime){
