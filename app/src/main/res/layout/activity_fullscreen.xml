@@ -19,15 +19,15 @@
 
     <TextView
         android:layout_width="193dp"
-        android:layout_height="38dp"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Score: "
+        android:text="Score: 0"
         android:id="@+id/ScoreView"
         android:layout_gravity="left|bottom"
         android:textColor="#ffd8d8d8" />
 
     <TextView
-        android:layout_width="117dp"
+        android:layout_width="173dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Highest:"
