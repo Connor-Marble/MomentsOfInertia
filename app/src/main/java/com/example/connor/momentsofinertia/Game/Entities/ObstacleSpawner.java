@@ -36,6 +36,7 @@ public class ObstacleSpawner extends GameEntity implements GameStartListener {
     float spawnChance = 0.01f;
     int height = 1000;
     private boolean gameStarted = false;
+    float spawnRateRamp = 0.0002f;
 
     public ObstacleSpawner(Vector2D position) {
         super(new Vector2D(0d, 0d));
@@ -52,6 +53,10 @@ public class ObstacleSpawner extends GameEntity implements GameStartListener {
     @Override
     public void update(double deltaTime) {
         height = parentView.getHeight();
+
+        if(gameStarted) {
+            spawnChance += spawnRateRamp * (float)deltaTime;
+        }
     }
 
     public void advance(int distance, float probability){
@@ -59,6 +64,7 @@ public class ObstacleSpawner extends GameEntity implements GameStartListener {
         if(random.nextFloat() < probability){
             parentView.addEntity(new Obstacle(new Vector2D(xLocation, random.nextInt(height))));
         }
+
     }
 
     @Override

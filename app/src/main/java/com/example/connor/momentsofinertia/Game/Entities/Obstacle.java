@@ -43,6 +43,8 @@ public class Obstacle extends GameEntity implements Collidable, GameStartListene
     public Obstacle(Vector2D position) {
         super(position, 0);
         setCollisionRect();
+        if(hasGameStarted)
+            sizeMultiplier = 1;
     }
 
     public Obstacle(Vector2D position, Rect collisionRect) {
