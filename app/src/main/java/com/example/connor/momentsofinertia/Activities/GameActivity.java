@@ -32,6 +32,7 @@ import com.example.connor.momentsofinertia.util.Vector2D;
 
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.view.View;
@@ -51,9 +52,15 @@ public class GameActivity extends Activity{
 
     private GameView gameView;
 
+    private SharedPreferences userData;
+    private int highestScore;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        userData = getSharedPreferences("user_data", 0);
+        highestScore = userData.getInt("highScore", 0);
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -62,6 +69,8 @@ public class GameActivity extends Activity{
         this.gameView = (GameView)findViewById(R.id.game_view);
 
         gameView.setScoreView((TextView)findViewById(R.id.ScoreView));
+
+        ((TextView)findViewById(R.id.HighScoreView)).setText("Highest: " + Integer.toString((highestScore-500)/100));
     }
 
     /**Stops the gameview from updating
@@ -108,6 +117,15 @@ public class GameActivity extends Activity{
 
         gameView.addEntity(new FadeOverlay(gameView.getWidth(), gameView.getHeight()));
 
+    }
+
+    @Override
+    protected  void onDestroy(){
+        super.onDestroy();
+        highestScore = Math.max(gameView.player.score, highestScore);
+        SharedPreferences.Editor editor = userData.edit();
+        editor.putInt("highScore", highestScore);
+        editor.commit();
     }
 
     /**

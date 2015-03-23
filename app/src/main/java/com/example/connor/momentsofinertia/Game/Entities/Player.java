@@ -45,7 +45,7 @@ public class Player extends GameEntity {
 
     public Rect collisionRect;
 
-    private int score;
+    public int score;
     private TextView scoreView;
 
     public Player(Vector2D position){
