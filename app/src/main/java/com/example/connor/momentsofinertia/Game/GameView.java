@@ -66,6 +66,7 @@ public class GameView extends View implements PlayerDeathListener {
     double deltaTime;
 
     private boolean gameStarted = false;
+
     public boolean isRunning = false;
 
     public boolean gameOver;
@@ -105,6 +106,7 @@ public class GameView extends View implements PlayerDeathListener {
             return;
 
         update(deltaTime);
+
 
         Canvas btmpCanvas = new Canvas(drawBitmap);
 
@@ -223,17 +225,27 @@ public class GameView extends View implements PlayerDeathListener {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
+        //the entity list will be empty if the draw/update cycle hasn't completed
+        //at least once. In this case touch input is effectively locked out until
+        //the list has been populated
+        if(gameEntities.size() == 0){
+            return true;
+        }
+
         if(event.getAction() == MotionEvent.ACTION_DOWN){
 
+            //start game if it hasn't already been started
             if(!gameStarted){
                 startGame();
             }
 
+            //update the rope location
             Vector2D location = new Vector2D(event.getX() - xScroll, event.getY());
             player.createRope(location);
             return true;
         }
-        if(event.getAction() == MotionEvent.ACTION_UP){
+        if(event.getAction() == MotionEvent.ACTION_UP&&player!=null){
             player.rope = null;
         }
         return false;

@@ -71,6 +71,8 @@ public class GameActivity extends Activity{
         gameView.setScoreView((TextView)findViewById(R.id.ScoreView));
 
         ((TextView)findViewById(R.id.HighScoreView)).setText("Highest: " + Integer.toString((highestScore-500)/100));
+
+        populateGameView();
     }
 
     /**Stops the gameview from updating
@@ -98,15 +100,9 @@ public class GameActivity extends Activity{
     }
 
     /**
-     * sets up the game when the activity is started
-     *
-     * creates background stars and obstacles
-     * @param savedInstanceState
+     * used to create all game entities needed before the game is started.
      */
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-
+    private void populateGameView(){
         gameView.addEntity(new TitleText(new Vector2D(0, 0), gameView));
         ObstacleSpawner spawner = new ObstacleSpawner(new Vector2D(0, 0));
         gameView.addEntity(spawner);
@@ -117,7 +113,9 @@ public class GameActivity extends Activity{
 
         gameView.addEntity(new FadeOverlay(gameView.getWidth(), gameView.getHeight()));
 
+        //notify gameview that the activity has completed start process.
     }
+
 
     @Override
     protected  void onDestroy(){
