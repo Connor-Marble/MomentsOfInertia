@@ -61,7 +61,6 @@ public class GameView extends View implements PlayerDeathListener {
     public long lastUpdate = System.currentTimeMillis();
     final int BACKGROUND_COLOR = Color.BLACK;
     final boolean DRAW_FRAMERATE = false;
-    private Bitmap drawBitmap;
 
     double deltaTime;
 
