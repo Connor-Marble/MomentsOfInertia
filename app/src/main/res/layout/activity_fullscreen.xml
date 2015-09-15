@@ -13,7 +13,7 @@
     <view
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="com.example.connor.momentsofinertia.Game.GameView"
+        class="com.cmargb.momentsofinertia.Game.GameView"
         android:id="@+id/game_view"
         android:layout_gravity="center" />
 
