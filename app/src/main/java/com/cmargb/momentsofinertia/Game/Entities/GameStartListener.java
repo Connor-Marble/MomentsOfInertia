@@ -17,30 +17,16 @@
  * along with Moments of Inertia.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.example.connor.momentsofinertia.Game.Entities;
-
-import com.example.connor.momentsofinertia.util.Vector2D;
-
-import java.util.ArrayList;
+package com.cmargb.momentsofinertia.Game.Entities;
 
 /**
- * Created by connor on 2/1/15.
+ * Interface used to notify objects of the game starting
+ *
+ * Created by connor on 2/26/15.
  */
-public class Rope {
-
-    public ArrayList<Vector2D> ropePoints;
-    Vector2D endPoint;
-    double restLength;
-
-    public Rope(Vector2D startAnchor, Vector2D endPoint){
-        ropePoints = new ArrayList<Vector2D>();
-        ropePoints.add(startAnchor);
-        this.endPoint = endPoint;
-        restLength = Vector2D.distance(startAnchor, endPoint);
-    }
-
-    public void update(){
-
-    }
-
+public interface GameStartListener {
+    /**
+     * called on game start
+     */
+    public void gameStarted();
 }

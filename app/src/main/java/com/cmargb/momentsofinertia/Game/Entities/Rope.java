@@ -17,19 +17,30 @@
  * along with Moments of Inertia.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.example.connor.momentsofinertia.Game;
+package com.cmargb.momentsofinertia.Game.Entities;
 
-import android.graphics.Rect;
+import com.cmargb.momentsofinertia.util.Vector2D;
 
-import com.example.connor.momentsofinertia.util.Vector2D;
+import java.util.ArrayList;
 
 /**
- * Created by connor on 2/2/15.
+ * Created by connor on 2/1/15.
  */
-public interface Collidable {
-    public Rect collisionRect = null;
+public class Rope {
 
-    public boolean checkRect(Rect area);
+    public ArrayList<Vector2D> ropePoints;
+    Vector2D endPoint;
+    double restLength;
 
-    public boolean recieveRaycast(Vector2D origin, double angle, double distance);
+    public Rope(Vector2D startAnchor, Vector2D endPoint){
+        ropePoints = new ArrayList<Vector2D>();
+        ropePoints.add(startAnchor);
+        this.endPoint = endPoint;
+        restLength = Vector2D.distance(startAnchor, endPoint);
+    }
+
+    public void update(){
+
+    }
+
 }

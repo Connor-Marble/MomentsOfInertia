@@ -17,7 +17,7 @@
  * along with Moments of Inertia.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.example.connor.momentsofinertia.Game;
+package com.cmargb.momentsofinertia.Game;
 
 /**
  * Created by connor on 2/6/15.

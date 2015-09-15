@@ -17,16 +17,19 @@
  * along with Moments of Inertia.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.example.connor.momentsofinertia.Game.Entities;
+package com.cmargb.momentsofinertia.Game;
+
+import android.graphics.Rect;
+
+import com.cmargb.momentsofinertia.util.Vector2D;
 
 /**
- * Interface used to notify objects of the game starting
- *
- * Created by connor on 2/26/15.
+ * Created by connor on 2/2/15.
  */
-public interface GameStartListener {
-    /**
-     * called on game start
-     */
-    public void gameStarted();
+public interface Collidable {
+    public Rect collisionRect = null;
+
+    public boolean checkRect(Rect area);
+
+    public boolean recieveRaycast(Vector2D origin, double angle, double distance);
 }

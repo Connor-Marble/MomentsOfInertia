@@ -17,7 +17,7 @@
  * along with Moments of Inertia.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.example.connor.momentsofinertia.util;
+package com.cmargb.momentsofinertia.util;
 
 /**
  * Created by connor on 1/30/15.

@@ -17,17 +17,16 @@
  * along with Moments of Inertia.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.example.connor.momentsofinertia.Game.Entities;
+package com.cmargb.momentsofinertia.Game.Entities;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 
-import com.example.connor.momentsofinertia.Game.GameView;
-import com.example.connor.momentsofinertia.R;
-import com.example.connor.momentsofinertia.util.Vector2D;
+import com.cmargb.momentsofinertia.Game.GameView;
+import com.cmargb.momentsofinertia.R;
+import com.cmargb.momentsofinertia.util.Vector2D;
 
 /**
  * Created by connor on 3/4/15.

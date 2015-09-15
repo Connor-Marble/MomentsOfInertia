@@ -17,7 +17,7 @@
  * along with Moments of Inertia.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.example.connor.momentsofinertia.Game;
+package com.cmargb.momentsofinertia.Game;
 
 import android.app.Activity;
 import android.content.Context;
@@ -31,12 +31,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.connor.momentsofinertia.Game.Entities.GameEntity;
-import com.example.connor.momentsofinertia.Game.Entities.GameStartListener;
-import com.example.connor.momentsofinertia.Game.Entities.Player;
-import com.example.connor.momentsofinertia.Game.Entities.ScoreLineTracker;
-import com.example.connor.momentsofinertia.Game.Entities.Trail;
-import com.example.connor.momentsofinertia.util.Vector2D;
+import com.cmargb.momentsofinertia.Game.Entities.GameEntity;
+import com.cmargb.momentsofinertia.Game.Entities.GameStartListener;
+import com.cmargb.momentsofinertia.Game.Entities.Player;
+import com.cmargb.momentsofinertia.Game.Entities.ScoreLineTracker;
+import com.cmargb.momentsofinertia.Game.Entities.Trail;
+import com.cmargb.momentsofinertia.util.Vector2D;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -96,8 +96,6 @@ public class GameView extends View implements PlayerDeathListener {
     {
         gameEntities = new LinkedList<GameEntity>();
         newEntities = new LinkedList<GameEntity>();
-
-        drawBitmap = Bitmap.createBitmap(1920, 1080, Bitmap.Config.ARGB_8888);
     }
 
     public void onDraw(Canvas canvas){
@@ -106,9 +104,6 @@ public class GameView extends View implements PlayerDeathListener {
             return;
 
         update(deltaTime);
-
-
-        Canvas btmpCanvas = new Canvas(drawBitmap);
 
         Paint paint = new Paint();
         paint.setColor(BACKGROUND_COLOR);

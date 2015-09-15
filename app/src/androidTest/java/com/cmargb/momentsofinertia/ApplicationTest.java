@@ -1,4 +1,4 @@
-package com.example.connor.momentsofinertia;
+package com.cmargb.momentsofinertia;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

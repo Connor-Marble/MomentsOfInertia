@@ -17,17 +17,15 @@
  * along with Moments of Inertia.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.example.connor.momentsofinertia.Activities;
+package com.cmargb.momentsofinertia.Activities;
 
-import com.example.connor.momentsofinertia.Game.Entities.BackgroundStar;
-import com.example.connor.momentsofinertia.Game.Entities.FadeOverlay;
-import com.example.connor.momentsofinertia.Game.Entities.ObstacleSpawner;
-import com.example.connor.momentsofinertia.Game.Entities.TitleText;
-import com.example.connor.momentsofinertia.Game.GameView;
-import com.example.connor.momentsofinertia.Game.Entities.Obstacle;
-import com.example.connor.momentsofinertia.Game.Entities.Player;
-import com.example.connor.momentsofinertia.R;
-import com.example.connor.momentsofinertia.util.Vector2D;
+import com.cmargb.momentsofinertia.Game.Entities.BackgroundStar;
+import com.cmargb.momentsofinertia.Game.Entities.FadeOverlay;
+import com.cmargb.momentsofinertia.Game.Entities.ObstacleSpawner;
+import com.cmargb.momentsofinertia.Game.Entities.TitleText;
+import com.cmargb.momentsofinertia.Game.GameView;
+import com.cmargb.momentsofinertia.R;
+import com.cmargb.momentsofinertia.util.Vector2D;
 
 
 
@@ -38,8 +36,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
-
-import java.util.Random;
 
 /**
  * The main game activity. This activity

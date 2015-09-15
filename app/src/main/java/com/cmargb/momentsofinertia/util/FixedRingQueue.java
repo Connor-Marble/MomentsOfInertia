@@ -17,13 +17,7 @@
  * along with Moments of Inertia.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.example.connor.momentsofinertia.util;
-
-import android.support.annotation.NonNull;
-import android.util.Log;
-
-import java.util.Collection;
-import java.util.Iterator;
+package com.cmargb.momentsofinertia.util;
 
 /**
  * Created by connor on 3/9/15.
