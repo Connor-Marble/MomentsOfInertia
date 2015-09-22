@@ -26,6 +26,7 @@ import android.graphics.Rect;
 import android.widget.TextView;
 
 import com.cmargb.momentsofinertia.Game.PlayerDeathListener;
+import com.cmargb.momentsofinertia.util.ScalingUtils;
 import com.cmargb.momentsofinertia.util.Vector2D;
 
 import java.util.ArrayList;
@@ -59,8 +60,11 @@ public class Player extends GameEntity {
     @Override
     public void draw(int xScroll, Canvas canvas, Paint paint){
         paint.setColor(Color.BLUE);
-        canvas.drawRect(new Rect((int)position.x-5 + xScroll, (int)position.y-5,
-                (int)position.x+5 + xScroll, (int)position.y + 5), paint);
+        canvas.drawRect(new Rect(
+                ScalingUtils.cPX( (int)position.x-5 + xScroll),
+                ScalingUtils.cPX((int)position.y-5),
+                ScalingUtils.cPX((int)position.x+5 + xScroll),
+                ScalingUtils.cPX((int)position.y + 5)), paint);
         if(rope != null)
             drawRope(xScroll, canvas, paint);
         drawnX = xScroll + (int)position.x;
@@ -69,10 +73,11 @@ public class Player extends GameEntity {
     public void drawRope(int xScroll, Canvas canvas, Paint paint){
         paint.setColor(Color.GRAY);
         paint.setAlpha(150);
-        canvas.drawLine((float)rope.endPoint.x + xScroll,
-                (float)rope.endPoint.y,
-                (float)rope.ropePoints.get(0).x + xScroll,
-                (float)rope.ropePoints.get(0).y, paint);
+        canvas.drawLine(
+                (float) ScalingUtils.cPX((int)rope.endPoint.x + xScroll),
+                (float)ScalingUtils.cPX((int)rope.endPoint.y),
+                (float)ScalingUtils.cPX((int)rope.ropePoints.get(0).x + xScroll),
+                (float)ScalingUtils.cPX((int)rope.ropePoints.get(0).y), paint);
     }
 
     @Override
@@ -97,10 +102,10 @@ public class Player extends GameEntity {
     }
 
     private boolean isInBounds(){
-        return position.y < parentView.getHeight()&&
-                position.y > 0&&
-                drawnX > 0&&
-               drawnX < parentView.getWidth();
+        return ScalingUtils.cPX((int)position.y) < parentView.getHeight()&&
+                ScalingUtils.cPX((int)position.y) > 0&&
+                ScalingUtils.cPX((int)drawnX) > 0&&
+                ScalingUtils.cPX((int)drawnX) < parentView.getWidth();
     }
 
     private void addTension(double deltaTime){

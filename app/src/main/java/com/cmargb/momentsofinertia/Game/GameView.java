@@ -36,6 +36,7 @@ import com.cmargb.momentsofinertia.Game.Entities.GameStartListener;
 import com.cmargb.momentsofinertia.Game.Entities.Player;
 import com.cmargb.momentsofinertia.Game.Entities.ScoreLineTracker;
 import com.cmargb.momentsofinertia.Game.Entities.Trail;
+import com.cmargb.momentsofinertia.util.ScalingUtils;
 import com.cmargb.momentsofinertia.util.Vector2D;
 
 import java.util.Collections;
@@ -235,7 +236,7 @@ public class GameView extends View implements PlayerDeathListener {
             }
 
             //update the rope location
-            Vector2D location = new Vector2D(event.getX() - xScroll, event.getY());
+            Vector2D location = new Vector2D(ScalingUtils.iCPX((int)(event.getX())) - xScroll, ScalingUtils.iCPX((int) event.getY()));
             player.createRope(location);
             return true;
         }
@@ -257,7 +258,7 @@ public class GameView extends View implements PlayerDeathListener {
         player.registerDeathListener(this);
 
         addEntity(new Trail(1,50, player, 5f));
-        addEntity(new ScoreLineTracker(new Vector2D(0,getHeight()), player, new Vector2D(10,10)));
+        addEntity(new ScoreLineTracker(new Vector2D(0,ScalingUtils.iCPX(ScalingUtils.getScreenheight())), player, new Vector2D(10,10)));
         addEntity(new ScoreLineTracker(new Vector2D(0,0), player, new Vector2D(10,-10)));
 
         for(GameEntity entity: gameEntities){

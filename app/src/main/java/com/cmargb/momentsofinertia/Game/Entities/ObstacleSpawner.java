@@ -22,6 +22,7 @@ package com.cmargb.momentsofinertia.Game.Entities;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
+import com.cmargb.momentsofinertia.util.ScalingUtils;
 import com.cmargb.momentsofinertia.util.Vector2D;
 
 import java.util.Random;
@@ -34,7 +35,7 @@ public class ObstacleSpawner extends GameEntity implements GameStartListener {
     int xLocation = 600;
     Random random;
     float spawnChance = 0.01f;
-    int height = 1000;
+    int height = 6000;
     private boolean gameStarted = false;
     float spawnRateRamp = 0.0002f;
 
@@ -46,13 +47,13 @@ public class ObstacleSpawner extends GameEntity implements GameStartListener {
     @Override
     public void draw(int xScroll, Canvas canvas, Paint paint) {
         while((-xScroll)+2000 > xLocation && gameStarted){
-            advance(1, spawnChance);
+            advance(1, ScalingUtils.fICPX(spawnChance));
         }
     }
 
     @Override
     public void update(double deltaTime) {
-        height = parentView.getHeight();
+        height = ScalingUtils.iCPX(1080);
 
         if(gameStarted) {
             spawnChance += spawnRateRamp * (float)deltaTime;

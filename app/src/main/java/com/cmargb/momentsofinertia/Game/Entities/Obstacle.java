@@ -24,6 +24,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 
 import com.cmargb.momentsofinertia.Game.Collidable;
+import com.cmargb.momentsofinertia.util.ScalingUtils;
 import com.cmargb.momentsofinertia.util.Vector2D;
 
 /**
@@ -71,7 +72,8 @@ public class Obstacle extends GameEntity implements Collidable, GameStartListene
     }
 
     private void setCollisionRect(){
-        collisionRect = new Rect((int)(position.x-(75d*sizeMultiplier/2)), (int)(position.y-(75d*sizeMultiplier/2)),
+        collisionRect = new Rect(
+                (int)(position.x-(75d*sizeMultiplier/2)), (int)(position.y-(75d*sizeMultiplier/2)),
                 (int)(position.x + (75d*sizeMultiplier/2)), (int)(position.y+(75d*sizeMultiplier/2)));
     }
 
@@ -96,15 +98,20 @@ public class Obstacle extends GameEntity implements Collidable, GameStartListene
         drawOutline(scroll, canvas, paint);
 
         paint.setARGB(255, 255, 255-colorMod, 0);
-        canvas.drawRect(new Rect(collisionRect.left + scroll, collisionRect.top, collisionRect.right + scroll,collisionRect.bottom), paint);
+        canvas.drawRect(new Rect(
+                ScalingUtils.cPX( collisionRect.left + scroll),
+                ScalingUtils.cPX(collisionRect.top),
+                ScalingUtils.cPX(collisionRect.right + scroll),
+                ScalingUtils.cPX(collisionRect.bottom)), paint);
     }
 
     public void drawOutline(int scroll, Canvas canvas, Paint paint){
         paint.setARGB(255, 64, 64, 64);
-        canvas.drawRect(new Rect(collisionRect.left + scroll -outlineWidth,
-                collisionRect.top - outlineWidth,
-                collisionRect.right + scroll + outlineWidth,
-                collisionRect.bottom + outlineWidth), paint);
+        canvas.drawRect(new Rect(
+                ScalingUtils.cPX(collisionRect.left + scroll - outlineWidth),
+                ScalingUtils.cPX(collisionRect.top - outlineWidth),
+                ScalingUtils.cPX(collisionRect.right + scroll + outlineWidth),
+                ScalingUtils.cPX(collisionRect.bottom + outlineWidth)), paint);
     }
 
     public void deathCheck(int xScroll){
