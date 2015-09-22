@@ -24,6 +24,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.cmargb.momentsofinertia.util.FixedRingQueue;
+import com.cmargb.momentsofinertia.util.ScalingUtils;
 import com.cmargb.momentsofinertia.util.Vector2D;
 
 /**
@@ -54,10 +55,10 @@ public class Trail extends GameEntity {
             paint.setAlpha(255-(int)(t*255f));
             Vector2D firstPos = previousLocations.get(i-1);
             Vector2D secondPos = previousLocations.get(i);
-            canvas.drawLine((float)firstPos.x + xScroll,
-                    (float)firstPos.y,
-                    (float)secondPos.x + xScroll,
-                    (float)secondPos.y,
+            canvas.drawLine((float) ScalingUtils.cPX((int)firstPos.x + xScroll),
+                    (float)ScalingUtils.cPX((int)firstPos.y),
+                    (float)ScalingUtils.cPX((int)secondPos.x + xScroll),
+                    (float)ScalingUtils.cPX((int)secondPos.y),
                     paint);
         }
     }

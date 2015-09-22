@@ -23,6 +23,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import com.cmargb.momentsofinertia.util.ScalingUtils;
 import com.cmargb.momentsofinertia.util.Vector2D;
 
 /**
@@ -43,15 +44,16 @@ public class ScoreLineTracker extends GameEntity {
     public void draw(int xScroll, Canvas canvas, Paint paint) {
         paint.setColor(Color.WHITE);
         paint.setStrokeWidth(5f);
-        canvas.drawLine((float)(position.x - size.x + xScroll),
-                (float)position.y ,
-                (float)position.x + xScroll,
-                (float)(position.y - size.y), paint);
+        canvas.drawLine((float)(ScalingUtils.cPX((int)position.x - (int)size.x + xScroll)),
+                (float)ScalingUtils.cPX((int)position.y ),
+                (float)ScalingUtils.cPX((int)position.x + xScroll),
+                (float)ScalingUtils.cPX((int)(position.y - size.y)), paint);
 
-        canvas.drawLine((float)(position.x + size.x + xScroll),
-                (float)position.y ,
-                (float)position.x + xScroll,
-                (float)(position.y - size.y), paint);
+        canvas.drawLine((float)(ScalingUtils.cPX((int)position.x + (int)size.x + xScroll)),
+                (float)ScalingUtils.cPX((int)position.y ),
+                (float)ScalingUtils.cPX((int)position.x + xScroll),
+                (float)ScalingUtils.cPX((int)(position.y - size.y)), paint);
+
     }
 
     @Override

@@ -24,6 +24,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+import com.cmargb.momentsofinertia.util.ScalingUtils;
 import com.cmargb.momentsofinertia.util.Vector2D;
 
 import java.util.Random;
@@ -81,7 +82,11 @@ public class BackgroundStar extends GameEntity implements GameStartListener {
         int scroll = (int)((double)xScroll * (distance/2 + 0.5));
         paint.setColor(Color.WHITE);
         paint.setAlpha((int)(opacity * 255d));
-        canvas.drawRect(new Rect(scroll + (int)position.x, (int)position.y, scroll + size + (int)position.x,(int)position.y + size ),paint);
+        canvas.drawRect(new Rect(
+                ScalingUtils.cPX(scroll + (int)position.x),
+                ScalingUtils.cPX((int)position.y),
+                ScalingUtils.cPX( scroll + size + (int)position.x),
+                ScalingUtils.cPX((int)position.y + size )),paint);
         drawnX = scroll + (int)position.x;
     }
 

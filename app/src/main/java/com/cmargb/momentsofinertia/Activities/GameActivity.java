@@ -25,6 +25,7 @@ import com.cmargb.momentsofinertia.Game.Entities.ObstacleSpawner;
 import com.cmargb.momentsofinertia.Game.Entities.TitleText;
 import com.cmargb.momentsofinertia.Game.GameView;
 import com.cmargb.momentsofinertia.R;
+import com.cmargb.momentsofinertia.util.ScalingUtils;
 import com.cmargb.momentsofinertia.util.Vector2D;
 
 
@@ -55,8 +56,12 @@ public class GameActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ScalingUtils.setScreenWidth(getResources().getDisplayMetrics().widthPixels,
+                getResources().getDisplayMetrics().heightPixels);
+
         userData = getSharedPreferences("user_data", 0);
         highestScore = userData.getInt("highScore", 0);
+        highestScore = Math.max(highestScore, 0);
 
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -66,7 +71,7 @@ public class GameActivity extends Activity{
 
         gameView.setScoreView((TextView)findViewById(R.id.ScoreView));
 
-        ((TextView)findViewById(R.id.HighScoreView)).setText("Highest: " + Integer.toString((highestScore-500)/100));
+        ((TextView)findViewById(R.id.HighScoreView)).setText("Highest: " + Integer.toString((Math.max( 0,highestScore-500)/100)));
 
         populateGameView();
     }
